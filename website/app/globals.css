@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --snitch-black: #0a0a0a;
+  --snitch-red: #dc2626;
+  --snitch-green: #22c55e;
+  --snitch-white: #fafafa;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  font-family: 'JetBrains Mono', monospace;
+  background-color: var(--snitch-black);
+  color: var(--snitch-white);
+  overflow-x: hidden;
+}
+
+/* Scanline effect overlay */
+.scanline-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+}
+
+/* Flickering text */
+.flicker-text {
+  animation: textFlicker 0.1s infinite alternate;
+}
+
+@keyframes textFlicker {
+  0% { opacity: 1; }
+  25% { opacity: 0.95; }
+  50% { opacity: 1; }
+  75% { opacity: 0.92; }
+  100% { opacity: 1; }
+}
+
+/* Interrogation light effect */
+.interrogation-light {
+  position: fixed;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    ellipse at center top,
+    rgba(220, 38, 38, 0.08) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Dramatic button styles */
+.btn-snitch {
+  @apply relative px-8 py-4 font-bold uppercase tracking-widest;
+  @apply bg-snitch-red text-snitch-white;
+  @apply border-2 border-snitch-red;
+  @apply transition-all duration-300;
+  @apply hover:bg-transparent hover:shadow-red-glow;
+  @apply active:scale-95;
+}
+
+.btn-cooperate {
+  @apply relative px-8 py-4 font-bold uppercase tracking-widest;
+  @apply bg-snitch-green text-snitch-black;
+  @apply border-2 border-snitch-green;
+  @apply transition-all duration-300;
+  @apply hover:bg-transparent hover:text-snitch-green hover:shadow-green-glow;
+  @apply active:scale-95;
+}
+
+/* Glitch effect */
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  animation: glitchTop 1s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+}
+
+.glitch::after {
+  animation: glitchBottom 1.5s infinite;
+  clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+  -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+}
+
+@keyframes glitchTop {
+  2%, 64% { transform: translate(2px, -2px); }
+  4%, 60% { transform: translate(-2px, 2px); }
+  62% { transform: translate(13px, -1px) skew(-13deg); }
+}
+
+@keyframes glitchBottom {
+  2%, 64% { transform: translate(-2px, 0); }
+  4%, 60% { transform: translate(-2px, 0); }
+  62% { transform: translate(-22px, 5px) skew(21deg); }
+}
+
+/* Card styles */
+.drama-card {
+  @apply relative p-6 bg-snitch-darkgray border border-snitch-gray;
+  @apply transition-all duration-300;
+  @apply hover:border-snitch-red hover:shadow-red-glow;
+}
+
+/* Countdown digit box */
+.countdown-digit {
+  @apply bg-snitch-darkgray border border-snitch-red;
+  @apply px-4 py-3 text-4xl font-bold text-snitch-red;
+  @apply shadow-red-glow;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--snitch-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--snitch-red);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ef4444;
+}
+
+/* Typewriter effect */
+.typewriter {
+  overflow: hidden;
+  border-right: 2px solid var(--snitch-red);
+  white-space: nowrap;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: var(--snitch-red) }
+}
+
+/* Pulse border animation */
+.pulse-border {
+  animation: pulseBorder 2s infinite;
+}
+
+@keyframes pulseBorder {
+  0%, 100% { border-color: var(--snitch-red); box-shadow: 0 0 5px rgba(220, 38, 38, 0.3); }
+  50% { border-color: #ef4444; box-shadow: 0 0 20px rgba(220, 38, 38, 0.6); }
+}
+
+/* Selection styling */
+::selection {
+  background: var(--snitch-red);
+  color: var(--snitch-white);
+}
